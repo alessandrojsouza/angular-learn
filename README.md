@@ -1,12 +1,12 @@
 
-<center>
+<div  align="center">
   <h1> Desenvolvimeno de Interfaces</h1>
  
 <img width="200"
     alt="Angular Logo"
     src="https://www.svgrepo.com/show/378486/angular-fill.svg"
   />
-</center>
+</div>
 
 ## Objetivo
 Este repositório é destinado ao aprendizado dos conceitos do framework Angular. 
