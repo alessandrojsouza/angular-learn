@@ -1,234 +1,148 @@
-# Fundamentos do Framework Angular
+# Angular Data Binding
 
-### O que é o Angular?
+### O que é Data Binding?
 
-O Angular é uma plataforma e um framework para construir aplicações cliente em HTML, CSS e JavaScript/TypeScript. Ele utiliza a abordagem de SPA (Single Page Application), permitindo que a aplicação seja carregada uma vez e, em seguida, as mudanças de conteúdo ocorram dinamicamente sem recarregar a página.
+O Data Binding é uma das funcionalidades mais fundamentais do Angular. Ele permite que você conecte os dados do modelo (classe do componente) com a interface do usuário (template), permitindo que as alterações feitas nos dados sejam refletidas automaticamente na interface do usuário e vice-versa.
 
-### Por que usar o Angular?
+Existem quatro tipos principais de data binding no Angular: Interpolation; Property Binding; Event Binding; Two-Way Binding. 
 
-- **Produtividade**: O Angular fornece ferramentas e estruturas que facilitam o desenvolvimento ágil e eficiente.
-- **Arquitetura sólida**: Seu design modular e orientado a componentes simplifica a organização do código e a reutilização de funcionalidades.
-- **Performance**: O Angular otimiza o desempenho da aplicação, garantindo uma experiência rápida e fluida para os usuários.
-- **Ecossistema e comunidade ativa**: A plataforma Angular possui uma grande comunidade de desenvolvedores e uma vasta quantidade de bibliotecas e recursos disponíveis.
+### Interpolation `{{ }}`
 
-### Principais características e benefícios
+A interpolação é uma forma simples de data binding que permite exibir valores do modelo no template, dentro de elementos de texto ou atributos.
 
-- **TypeScript**: O Angular é escrito em TypeScript, que adiciona recursos de tipagem estática ao JavaScript, tornando o código mais robusto e legível.
-- **Data Binding**: O poderoso mecanismo de data binding facilita a sincronização dos dados entre os componentes e o template.
-- **Injeção de Dependência**: O Angular possui um sistema de injeção de dependência que permite gerenciar as dependências entre os componentes de forma eficiente.
-- **Diretivas**: As diretivas permitem estender a sintaxe HTML, criando comportamentos personalizados para os elementos da página.
-- **Roteamento**: O roteador do Angular permite criar aplicações de várias páginas dentro de uma SPA, gerenciando as transições entre os componentes.
-- **Testabilidade**: O Angular incentiva práticas de teste, tornando as aplicações mais confiáveis e fáceis de manter.
+Exemplo:
 
-### Arquitetura do Angular
+```html
+<h1>{{ titulo }}</h1>
+<p>{{ descricao }}</p>
 
-A arquitetura do Angular é baseada em alguns conceitos fundamentais, como componentes, módulos, serviços e diretivas. Esses elementos são combinados para criar uma estrutura sólida e modular para desenvolver aplicações web com eficiência e escalabilidade.
+```
+### Property Binding `[ ]`
 
-1. **Componentes**:
+O Property Binding permite atribuir valores de propriedades do modelo a atributos de elementos HTML.
 
-Os componentes são blocos de construção essenciais do Angular. Eles são responsáveis por controlar partes específicas da interface do usuário e podem ser reutilizados em diferentes partes da aplicação. Cada componente possui um template associado que define a estrutura do DOM a ser renderizada.
+Exemplo:
 
-Exemplo de um componente Angular:
+```html
+<button [disabled]="isBotaoDesabilitado">Clique aqui</button>
 
-```typescript
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-exemplo', // Seletor do componente, usado para inserir o componente no template.
-  templateUrl: './exemplo.component.html', // Caminho do template associado ao componente.
-  styleUrls: ['./exemplo.component.scss'] // Arquivos de estilo associados ao componente.
-})
-export class ExemploComponent {
-  // Lógica do componente aqui...
-}
 ```
 
-2. **Diretivas**:
-As diretivas são instruções para o DOM. Elas podem ser utilizadas para modificar a aparência, comportamento ou estrutura do HTML. Existem diretivas incorporadas, como **ngIf** e **ngFor**, e você também pode criar suas próprias diretivas personalizadas.
+### Event Binding `( )`
 
-Exemplo de uma diretiva personalizada:
+O Event Binding permite vincular eventos (como cliques, mouseover, etc.) a métodos do modelo no componente.
 
-```typescript
-import { Directive, ElementRef, HostListener } from '@angular/core';
+Exemplo:
 
-@Directive({
-  selector: '[appDestacar]' // Seletor para usar a diretiva no template.
-})
-export class DestacarDirective {
-  constructor(private el: ElementRef) {}
+```html
+<button (click)="botaoClicado()">Clique aqui</button>
 
-  @HostListener('mouseenter') onMouseEnter() {
-    this.realcarTexto('yellow');
-  }
-
-  @HostListener('mouseleave') onMouseLeave() {
-    this.realcarTexto(null);
-  }
-
-  private realcarTexto(cor: string) {
-    this.el.nativeElement.style.backgroundColor = cor;
-  }
-}
 ```
 
-3. **Serviços**:
-Os serviços são classes que contêm lógica reutilizável e podem ser injetados em componentes e outros serviços. Eles são usados para compartilhar dados, realizar chamadas HTTP, realizar operações assíncronas e muito mais.
+### Two-Way Binding `[( )]`
 
-Exemplo de um serviço Angular:
+O Two-Way Binding é uma combinação do *Property Binding* e do *Event Binding*. Ele mantém a sincronização bidirecional entre o modelo e o template. Qualquer alteração no modelo ou no template refletirá automaticamente no outro.
 
-```typescript
-import { Injectable } from '@angular/core';
+Exemplo:
 
-@Injectable({
-  providedIn: 'root', // Configuração para tornar o serviço disponível em toda a aplicação.
-})
-export class ExemploService {
-  // Lógica do serviço aqui...
-}
+```html
+<input [(ngModel)]="nome">
+<p>Olá, {{ nome }}!</p>
+
 ```
 
-4. **Módulos**:
-Os módulos são utilizados para organizar o código em pedaços funcionais e independentes. Cada aplicação Angular tem pelo menos um módulo raiz (normalmente chamado de AppModule) que é responsável por inicializar a aplicação. Além disso, você pode criar módulos para organizar funcionalidades específicas.
+**Como habilitar o Two-Way Binding?**
 
-Exemplo de um módulo Angular:
+Para utilizar o *Two-Way Binding*, é necessário importar o módulo **FormsModule** no seu módulo principal (normalmente *app.module.ts*). Certifique-se de que a importação está correta no array imports do NgModule:
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ExemploComponent } from './exemplo.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms'; // Importe o FormsModule
+
+import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [ExemploComponent], // Componentes declarados neste módulo.
-  imports: [CommonModule], // Módulos importados para uso neste módulo.
-  exports: [ExemploComponent], // Componentes, diretivas e pipes disponíveis para outros módulos.
+  declarations: [AppComponent],
+  imports: [BrowserModule, FormsModule], // Adicione FormsModule aqui
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class ExemploModule { }
-
+export class AppModule {}
 ```
 
-5. **Templates**:
-Os templates são uma parte vital da arquitetura do Angular. Eles definem a estrutura do DOM a ser renderizada para um determinado componente. Os templates são escritos em HTML e podem incluir diretivas e bindings para exibir dados e interagir com a lógica do componente.
+**Observações sobre Data Binding:**
 
-Exemplo de um template Angular:
+- O Data Binding é uma maneira poderosa de conectar os dados do modelo e o template, tornando a aplicação mais dinâmica e reativa às mudanças nos dados.
+- É importante ter cuidado para evitar ciclos infinitos de atualização quando usar o Two-Way Binding, pois alterações no modelo podem desencadear atualizações contínuas no template e vice-versa.
+- Ao usar o Two-Way Binding com a diretiva ngModel, lembre-se de importar o FormsModule como explicado anteriormente.
+  
+*Resumo*
+
+O Angular Data Binding é uma das principais razões pelas quais o framework é tão eficiente para o desenvolvimento de aplicações web reativas e interativas. Com o Data Binding, você pode criar interfaces de usuário dinâmicas e responsivas, facilitando a interação dos usuários com sua aplicação.
+
+## Class e Style Binding no Angular
+
+Além dos quatro tipos principais de data binding mencionados anteriormente, o Angular oferece recursos adicionais para vincular classes de CSS e estilos diretamente ao template.
+
+Esses recursos são conhecidos como **Class Binding** e **Style Binding**.
+
+### Class Binding
+
+O Class Binding permite adicionar ou remover classes CSS dinamicamente a elementos HTML com base em valores de propriedades do modelo. Isso é útil quando você deseja alterar o estilo de um elemento com base em determinadas condições ou estados do aplicativo.
+
+Exemplo:
 
 ```html
-
-<h2>Lista de Itens</h2>
-<ul>
-  <li *ngFor="let item of itens">{{ item }}</li>
-</ul>
-
+<button [class.botao-destaque]="isDestaque">Clique aqui</button>
 ```
 
-### Instalação do Angular CLI
+Neste exemplo, a classe CSS **"botao-destaque"** será adicionada ao botão somente quando a propriedade **isDestaque** no componente for verdadeira.
 
-Antes de começarmos a criar um projeto Angular, vamos instalar o Angular CLI, que é uma interface de linha de comando que facilita o desenvolvimento de aplicações Angular.
+### Style Binding
 
-1. Abra o terminal ou prompt de comando.
+O Style Binding permite definir estilos CSS diretamente no template, com base em valores de propriedades do modelo. Isso permite que você altere propriedades de estilo, como cor, tamanho, margens, etc., dinamicamente.
 
-2. Execute o seguinte comando para instalar o Angular CLI globalmente em seu sistema:
+Exemplo:
 
-```bash
-npm install -g @angular/cli
+```html
+<p [style.color]="corTexto">Este texto possui uma cor dinâmica</p>
 ```
 
-### Criação de um novo projeto Angular
+Neste exemplo, o estilo CSS **color** do parágrafo será definido com base no valor da propriedade **corTexto** no componente.
 
-Agora que temos o Angular CLI instalado, vamos criar um novo projeto Angular.
 
-Escolha o diretório onde deseja criar o projeto e navegue até ele no terminal.
+**Aplicando condições com Class e Style Binding**
 
-Execute o seguinte comando para criar um novo projeto Angular:
+Além de simplesmente adicionar classes e estilos, você também pode aplicar condições complexas usando **expressões ternárias** ou o operador **&&** (AND) para combinar várias condições.
 
-```bash
-ng new nome-do-projeto
+Exemplo usando expressão ternária:
+
+```html
+<button [class.botao-destaque]="isDestaque ? true : false">Clique aqui</button>
 ```
 
-O Angular CLI fará algumas perguntas sobre as configurações do projeto. Você pode optar por configurá-las conforme suas necessidades ou simplesmente pressionar "Enter" para utilizar as configurações padrão.
+Exemplo usando o operador && (AND):
 
-Aguarde até que o processo de criação seja concluído. O Angular CLI criará a estrutura básica do projeto e instalará as dependências necessárias.
-
-Navegue até o diretório do projeto recém-criado:
-
-```bash
-cd nome-do-projeto
+```html
+<button [class.botao-destaque]="isDestaque && !isDesabilitado">Clique aqui</button>
 ```
 
-Agora, você pode iniciar o servidor de desenvolvimento para executar o projeto:
+**Class e Style Binding em Two-Way Binding**
 
-```bash
-ng serve
+Você também pode combinar Class Binding ou Style Binding com Two-Way Binding para criar interfaces de usuário altamente dinâmicas e interativas.
+
+Exemplo com Two-Way Binding e Class Binding:
+
+```html
+<input [(ngModel)]="classeCSS" [class]="classeCSS">
 ```
 
-Abra seu navegador e acesse http://localhost:4200/. 
-Você deverá ver a aplicação Angular em execução.
+Neste exemplo, o valor da propriedade classeCSS no modelo é vinculado ao atributo de classe do elemento input, permitindo que o usuário altere dinamicamente a classe CSS aplicada ao elemento.
 
-### Estrutura do projeto
+*Resumo*
 
-```
-nome-do-projeto/
-  |- e2e/
-  |- node_modules/
-  |- src/
-  |  |- app/
-  |  |  |- components/
-  |  |  |- services/
-  |  |  |- app.module.ts
-  |  |  |- app.component.ts
-  |  |  |- app.component.html
-  |  |  |- app.component.scss
-  |  |  |- app.component.spec.ts
-  |  |- assets/
-  |  |- environments/
-  |  |- index.html
-  |  |- main.ts
-  |  |- styles.scss
-  |- angular.json
-  |- package.json
-  |- tsconfig.json
-  |- ...
-```
-Essa é a estrutura básica de um projeto Angular. Conforme você desenvolve a aplicação, outros diretórios e arquivos podem ser criados para acomodar novos componentes, serviços, módulos, entre outros. É importante seguir essa organização para manter um projeto Angular limpo e bem estruturado, facilitando a colaboração e a manutenção.
-
-**Explicação da Estrutura**:
-
- - **_e2e/_**: O diretório _"e2e"_ contém os testes end-to-end (e2e) escritos usando a ferramenta de teste Protractor. Esses testes permitem simular as ações do usuário e verificar se a aplicação funciona corretamente em um ambiente semelhante ao de produção.
-
- - **_node_modules/_**: Este é o diretório onde todas as dependências de pacotes npm são instaladas. Ele é criado automaticamente quando você executa npm install para baixar as dependências do projeto.
-
-- **_src/_**: Este é o diretório principal onde o código-fonte da aplicação Angular está localizado.
-
-- **_src/app/_**: O diretório _"app"_ contém todos os componentes, serviços e arquivos relacionados à lógica da aplicação.
-
-- **_src/app/components/_**: Neste diretório, você pode organizar seus componentes em subdiretórios ou criar componentes individuais. Cada componente é composto por quatro arquivos: _.component.ts_, _.component.html_, _.component.css_ e _.component.spec.ts_.
-
-- **_src/app/services/_**: Neste diretório, você pode criar e organizar os serviços utilizados para compartilhar dados e lógica entre os componentes.
-
-- **_src/app/app.module.ts_**: O arquivo _"app.module.ts"_ é o módulo raiz da aplicação. Ele importa e declara os componentes, serviços e outros módulos utilizados pela aplicação.
-
-- **_src/app/app.component.ts_**: O arquivo _"app.component.ts"_ é o componente raiz da aplicação, que controla o template principal _"app.component.html"_ e a folha de estilo _"app.component.css"_.
-
-- **_src/app/app.component.html_**: O arquivo _"app.component.html"_ é o template principal da aplicação, que define a estrutura do DOM que será renderizada.
-
-- **_src/app/app.component.css_**: O arquivo "_app.component.css_" contém estilos específicos do componente raiz.
-
-- **_src/app/app.component.spec.ts_**: O arquivo "_app.component.spec.ts_" contém os testes unitários do componente raiz.
-
-- **_src/assets/_**: O diretório "_assets_" contém recursos estáticos da aplicação, como imagens, arquivos JSON, entre outros.
-
-- **_src/environments/_**: Aqui você encontrará configurações específicas de ambiente, como as variáveis de ambiente para diferentes ambientes de desenvolvimento, teste e produção.
-
-- **_src/index.html_**: O arquivo _"index.html"_ é a página HTML principal da aplicação, onde o aplicativo Angular é inicializado.
-
-- **_src/main.ts_**: O arquivo "main.ts" é o ponto de entrada do aplicativo Angular. Ele chama a função _platformBrowserDynamic().bootstrapModule()_ para inicializar o módulo raiz _"AppModule"_.
-
-- **_src/styles.css_**: O arquivo _"styles.css"_ é o arquivo de folha de estilo global para a aplicação, que define estilos que afetam todos os componentes.
-
-- **_angular.json_**: O arquivo _"angular.json"_ contém as configurações do projeto Angular, como estilos globais, scripts, configurações de compilação e outras configurações específicas do Angular CLI.
-
-- **_package.json_**: O arquivo _"package.json"_ é usado pelo npm para gerenciar as dependências do projeto e armazenar informações sobre o projeto, como nome, versão, scripts, etc.
-
-- **_tsconfig.json_**: O arquivo _"tsconfig.json"_ é o arquivo de configuração do TypeScript, onde você pode definir as configurações do compilador TypeScript para o projeto.
+Class Binding e Style Binding são recursos poderosos do Angular para aplicar estilos e classes de forma dinâmica no template com base nas propriedades do modelo. Essas funcionalidades tornam o desenvolvimento de interfaces de usuário interativas e reativas mais fácil e eficiente, permitindo criar aplicações mais dinâmicas e com melhor experiência do usuário.
 
 
 ## Prática
