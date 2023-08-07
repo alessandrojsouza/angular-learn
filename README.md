@@ -1,153 +1,189 @@
-## Angular Diretivas
+## Angular Componentes
 
-As Diretivas são uma parte fundamental do Angular, permitindo estender a sintaxe HTML para **adicionar comportamentos** personalizados aos elementos da página. 
+Os componentes são blocos de construção essenciais do Angular.   Eles desempenham um papel central na arquitetura do framework, permitindo que você crie partes reutilizáveis e independentes da interface do usuário, cada uma com sua própria lógica, template e estilo.
 
-Existem três tipos principais de diretivas no Angular: 
+### Criando um Componente
 
-- Diretivas de Atributo
-- Diretivas de Estrutura
-- Diretivas de Componente
+Para criar um novo componente, você pode usar o Angular CLI (Command Line Interface) com o seguinte comando:
 
-### Diretivas de Atributo
+```bash
+ng generate component nome-do-componente
+```
 
-As Diretivas de Atributo são usadas para alterar o comportamento de elementos HTML existentes, adicionando ou modificando atributos e comportamentos. Elas são aplicadas como atributos de elementos no template.
+Isso criará uma estrutura de arquivos para o novo componente, incluindo um arquivo **.ts** (código do componente), **.html** (template) e **.css** (estilos), entre outros.
+
+**Estrutura de um Componente:**
+
+O código de um componente em Angular consiste em três partes principais: 
+
+- o decorator @Component
+- a classe do componente
+- o template associado.
 
 Exemplo:
-
-```html
-<!-- Diretiva de Atributo -->
-<p [appDestaque]="destacarTexto">Este parágrafo será destacado</p>
-
-```
-
-Aqui, **'appDestaque'** é uma Diretiva de Atributo personalizada que altera o estilo do parágrafo quando **'destacarTexto'** for verdadeiro.
-
-### Diretivas de Estrutura
-
-As Diretivas de Estrutura são usadas para manipular a estrutura do DOM, adicionando ou removendo elementos HTML do template. Elas são aplicadas como atributos estruturais em elementos HTML.
-
-#### Diretiva ngIf
-
-Exemplo:
-
-```html
-<!-- Diretiva de Estrutura -->
-<div *ngIf="mostrarElemento">
-  Este elemento só será exibido se mostrarElemento for verdadeiro.
-</div>
-
-```
-
-Aqui, **'*ngIf'** é uma Diretiva de Estrutura que adiciona ou remove o elemento <div> com base no valor de **'mostrarElemento'**.
-
-#### Diretiva ngFor
-
-A diretiva ***ngFor** é uma das diretivas de estrutura mais utilizadas no Angular. Ela permite iterar sobre uma coleção de elementos e renderizá-los no template. Com o *ngFor, você pode criar listas dinâmicas, tabelas ou exibir repetidamente elementos com base nos dados do modelo.
-
-Exemplo:
-
-A sintaxe do *ngFor é simples e consiste em atribuir uma variável local para cada item da coleção que você deseja iterar. A diretiva pode ser aplicada a qualquer elemento HTML no template.
-
-```html
-<div *ngFor="let item of itens">
-  {{ item }}
-</div>
-```
-
-Neste exemplo, estamos iterando sobre uma coleção chamada *itens*, e para cada item na coleção, o template renderizará um novo **<div>** contendo o valor do item.
-
-**Índice de Itens:** Além do valor do item, é possível acessar o índice do item no loop e rastrear os itens por uma propriedade exclusiva.
-
-Acessando o Índice:
-
-```html
-<div *ngFor="let item of itens; let i = index">
-  Item {{ i }}: {{ item }}
-</div>
-```
-
-#### Diretiva  ngSwitch, ngSwitchCase e ngSwitchDefault
-
-A diretiva **ngSwitch** é uma diretiva de estrutura do Angular que permite criar declarações condicionais no template com base em uma expressão. É uma maneira mais legível e organizada de criar lógicas condicionais do que usar várias diretivas ***ngIf**.
-
-
-**Sintaxe do ngSwitch:**
-
-A sintaxe do **ngSwitch** é semelhante a um switch em JavaScript. A diretiva **ngSwitch** é aplicada a um elemento pai que contém vários elementos filhos **ngSwitchCase** e um elemento **ngSwitchDefault**.
-
-```html
-<div [ngSwitch]="valorExpressao">
-  <div *ngSwitchCase="valor1">Conteúdo 1</div>
-  <div *ngSwitchCase="valor2">Conteúdo 2</div>
-  <div *ngSwitchCase="valor3">Conteúdo 3</div>
-  <div *ngSwitchDefault>Conteúdo padrão</div>
-</div>
-```
-
-1. O atributo **[ngSwitch]** recebe uma expressão que será comparada com os valores das **ngSwitchCase**.
-2. Cada elemento **ngSwitchCase** contém um valor que será comparado com a expressão do **ngSwitch**. O conteúdo do **ngSwitchCase** é renderizado se a expressão for igual ao valor do **ngSwitchCase**.
-3. O elemento **ngSwitchDefault** é opcional e é renderizado se a expressão não corresponder a nenhum dos valores nas **ngSwitchCase**.
-
-Exemplo:
-
-```html
-<div [ngSwitch]="opcao">
-  <p *ngSwitchCase="'A'">Você escolheu a opção A</p>
-  <p *ngSwitchCase="'B'">Você escolheu a opção B</p>
-  <p *ngSwitchCase="'C'">Você escolheu a opção C</p>
-  <p *ngSwitchDefault>Escolha uma opção válida (A, B ou C).</p>
-</div>
-```
-
-**Nota:**
-
-Observe que o valor do **ngSwitchCase** está entre aspas simples, pois é uma string. Se você estiver usando números ou outras variáveis, não é necessário usar aspas.
-
-
-Aplicando o ngSwitch com números:
-
-```html
-<div [ngSwitch]="opcaoNumero">
-  <p *ngSwitchCase="1">Você escolheu a opção 1</p>
-  <p *ngSwitchCase="2">Você escolheu a opção 2</p>
-  <p *ngSwitchCase="3">Você escolheu a opção 3</p>
-  <p *ngSwitchDefault>Escolha uma opção válida (1, 2 ou 3).</p>
-</div>
-```
-
-#### Diretiva Personalizada
-
-Você também pode criar suas próprias Diretivas personalizadas no Angular. Para isso, você precisa usar a função @Directive e implementar o código necessário para a diretiva.
-
-Exemplo de uma Diretiva de Atributo Personalizada:
 
 ```typescript
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 
-@Directive({
-  selector: '[appDestaque]' // Seletor para usar a diretiva no template.
+@Component({
+  selector: 'app-exemplo', // Seletor do componente, usado no template.
+  templateUrl: './exemplo.component.html', // Caminho do template do componente.
+  styleUrls: ['./exemplo.component.scss'] // Arquivos de estilo do componente.
 })
-export class DestaqueDirective {
-  constructor(private el: ElementRef) {}
+export class ExemploComponent {
+  // Lógica do componente aqui...
+}
+```
 
-  @HostListener('mouseenter') onMouseEnter() {
-    this.realcarTexto('yellow');
-  }
+**Usando um Componente:**
 
-  @HostListener('mouseleave') onMouseLeave() {
-    this.realcarTexto(null);
-  }
+Você pode usar um componente em outros componentes ou templates usando o seletor definido no decorator @Component.
 
-  private realcarTexto(cor: string) {
-    this.el.nativeElement.style.backgroundColor = cor;
+Exemplo de Uso de um Componente:
+
+```html
+<app-exemplo></app-exemplo>
+```
+### Comunicação entre Componentes
+
+Os componentes podem se comunicar entre si através de inputs e outputs.
+
+**Inputs**: Permitem que um componente pai passe dados para um componente filho.
+
+```typescript
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-filho',
+  template: '<p>{{ mensagem }}</p>'
+})
+export class FilhoComponent {
+  @Input() mensagem: string;
+}
+```
+
+```html
+<app-filho [mensagem]="mensagemDoPai"></app-filho>
+```
+
+**Outputs**: Permitem que um componente filho envie eventos para um componente pai.
+
+```typescript
+import { Component, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-filho',
+  template: '<button (click)="enviarMensagem()">Enviar Mensagem</button>'
+})
+export class FilhoComponent {
+  @Output() mensagemEnviada = new EventEmitter<void>();
+
+  enviarMensagem() {
+    this.mensagemEnviada.emit();
   }
 }
 ```
 
-Neste exemplo, criamos uma Diretiva de Atributo chamada **appDestaque**, que destaca o texto do elemento quando o mouse entra na área do elemento e remove o destaque quando o mouse sai.
 
-**Considerações Finais**
+```html
+<app-filho (mensagemEnviada)="acaoNoPai()"></app-filho>
+```
 
-As Diretivas são um recurso poderoso e versátil do Angular, permitindo que você crie comportamentos personalizados e reutilizáveis no template. Ao combinar Diretivas com os demais recursos do Angular, como Data Binding e Services, você pode criar aplicações web mais interativas e dinâmicas, facilitando a manutenção e o desenvolvimento de interfaces ricas para os usuários.
+
+### Ciclo de vida 
+
+O ciclo de vida de um componente Angular é composto por uma série de eventos que ocorrem desde a sua criação até a sua destruição.  Cada evento fornece a oportunidade de executar ações específicas em momentos-chave da vida útil do componente. 
+
+Aqui estão os principais eventos do ciclo de vida de um componente, acompanhados de exemplos que demonstram como eles podem ser usados:
+
+#### ngOnInit
+
+O evento ngOnInit é acionado logo após a inicialização de um componente. É um bom lugar para realizar inicializações, como buscar dados de um serviço ou configurar variáveis.
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-exemplo',
+  template: '<p>{{ mensagem }}</p>'
+})
+export class ExemploComponent implements OnInit {
+  mensagem: string;
+
+  ngOnInit() {
+    this.mensagem = 'Olá, mundo!';
+  }
+}
+```
+
+#### ngOnChange
+
+O evento *ngOnChanges* é acionado sempre que um valor de entrada *(@Input)* é alterado. Ele fornece um objeto que contém as alterações detectadas.
+
+```typescript
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+
+@Component({
+  selector: 'app-filho',
+  template: '<p>{{ mensagem }}</p>'
+})
+export class FilhoComponent implements OnChanges {
+  @Input() mensagem: string;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.mensagem) {
+      console.log('Valor de mensagem alterado para:', changes.mensagem.currentValue);
+    }
+  }
+}
+```
+
+#### ngDoCheck
+
+O evento *ngDoCheck* é acionado sempre que a detecção de mudanças é executada. Pode ser usado para realizar verificações manuais de mudanças.
+
+```typescript
+import { Component, DoCheck } from '@angular/core';
+
+@Component({
+  selector: 'app-exemplo',
+  template: '<p>{{ contador }}</p>'
+})
+export class ExemploComponent implements DoCheck {
+  contador: number = 0;
+
+  ngDoCheck() {
+    console.log('ngDoCheck executado.');
+    // Lógica para verificar mudanças manuais aqui...
+  }
+}
+```
+
+#### ngOnDestroy
+
+O evento *ngOnDestroy* é acionado quando um componente está prestes a ser destruído. É usado para realizar ações de limpeza, como cancelar inscrições, desconectar de serviços, etc.
+
+```typescript
+import { Component, OnDestroy } from '@angular/core';
+
+@Component({
+  selector: 'app-exemplo',
+  template: '<p>Componente será destruído em breve.</p>'
+})
+export class ExemploComponent implements OnDestroy {
+  ngOnDestroy() {
+    console.log('Componente destruído.');
+    // Ações de limpeza aqui...
+  }
+}
+```
+
+**Nota:**
+
+Lembre-se de que os eventos do ciclo de vida são opcionais e você não precisa implementar todos eles em cada componente. Escolha os eventos que são relevantes para o que você deseja alcançar e utilize-os conforme necessário.
+
+Além dos métodos principais do ciclo de vida do Angular, como *ngOnInit*, *ngOnChanges*, *ngDoCheck* e *ngOnDestroy*, existem outros métodos, como **ngAfterContentInit**, **ngAfterContentChecked**, **ngAfterViewInit** e **ngAfterViewChecked**, que oferecem oportunidades para interagir com o conteúdo projetado e a visualização do componente. Compreender e utilizar esses métodos adequadamente permitirá que você controle e otimize a lógica do seu componente em várias fases do ciclo de vida. 
+
+
 
 ## Prática 
