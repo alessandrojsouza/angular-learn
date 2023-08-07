@@ -1,106 +1,153 @@
-<div  align="center">
+## Angular Diretivas
 
-    <img width="200"
-        alt="Angular Logo"
-        src="https://www.svgrepo.com/show/378486/angular-fill.svg"
-      />
+As Diretivas são uma parte fundamental do Angular, permitindo estender a sintaxe HTML para **adicionar comportamentos** personalizados aos elementos da página. 
 
-    <h1> Desenvolvimeno de Interfaces</h1>
- 
+Existem três tipos principais de diretivas no Angular: 
+
+- Diretivas de Atributo
+- Diretivas de Estrutura
+- Diretivas de Componente
+
+### Diretivas de Atributo
+
+As Diretivas de Atributo são usadas para alterar o comportamento de elementos HTML existentes, adicionando ou modificando atributos e comportamentos. Elas são aplicadas como atributos de elementos no template.
+
+Exemplo:
+
+```html
+<!-- Diretiva de Atributo -->
+<p [appDestaque]="destacarTexto">Este parágrafo será destacado</p>
+
+```
+
+Aqui, **'appDestaque'** é uma Diretiva de Atributo personalizada que altera o estilo do parágrafo quando **'destacarTexto'** for verdadeiro.
+
+### Diretivas de Estrutura
+
+As Diretivas de Estrutura são usadas para manipular a estrutura do DOM, adicionando ou removendo elementos HTML do template. Elas são aplicadas como atributos estruturais em elementos HTML.
+
+#### Diretiva ngIf
+
+Exemplo:
+
+```html
+<!-- Diretiva de Estrutura -->
+<div *ngIf="mostrarElemento">
+  Este elemento só será exibido se mostrarElemento for verdadeiro.
 </div>
 
-## Objetivo
-Este repositório é destinado ao aprendizado dos conceitos do framework Angular. 
+```
 
-## Metodologia 
-O  processo de aquisição dos conhecimentos deve ser realizado a partir do estudo de cada branch existente neste repositório. 
+Aqui, **'*ngIf'** é uma Diretiva de Estrutura que adiciona ou remove o elemento <div> com base no valor de **'mostrarElemento'**.
 
-Cada branch implementada marca um conjunto de conceitos que são aplicados em código e que vai sendo refatorado até aplicação de todo conteúdo visto na disciplina.
+#### Diretiva ngFor
 
-## Pré-Requistos
- - Conhecimento em [HTML e CSS](https://learn.microsoft.com/pt-br/training/paths/build-web-pages-html-css-for-beginners/)
- - Conhecimento em [TypeScript](https://learn.microsoft.com/pt-br/training/paths/build-javascript-applications-typescript/)
+A diretiva ***ngFor** é uma das diretivas de estrutura mais utilizadas no Angular. Ela permite iterar sobre uma coleção de elementos e renderizá-los no template. Com o *ngFor, você pode criar listas dinâmicas, tabelas ou exibir repetidamente elementos com base nos dados do modelo.
 
-## Agenda
+Exemplo:
 
-1.  Introdução
- 
- - O que é o Angular?
- - Por que usar o Angular?
- - Principais características e benefícios
+A sintaxe do *ngFor é simples e consiste em atribuir uma variável local para cada item da coleção que você deseja iterar. A diretiva pode ser aplicada a qualquer elemento HTML no template.
 
-2. Arquitetura do Angular
+```html
+<div *ngFor="let item of itens">
+  {{ item }}
+</div>
+```
 
- - Componentes
- - Módulos
- - Serviços
- - Diretivas
- - Templates
+Neste exemplo, estamos iterando sobre uma coleção chamada *itens*, e para cada item na coleção, o template renderizará um novo **<div>** contendo o valor do item.
 
-3. Componentes
+**Índice de Itens:** Além do valor do item, é possível acessar o índice do item no loop e rastrear os itens por uma propriedade exclusiva.
 
- - O que são componentes?
- - Como criar componentes
- - Ciclo de vida dos componentes
+Acessando o Índice:
 
-4. Módulos
+```html
+<div *ngFor="let item of itens; let i = index">
+  Item {{ i }}: {{ item }}
+</div>
+```
 
-- O que são módulos?
-- Organizando o código com módulos
-- Módulos compartilhados vs. módulos de funcionalidade
+#### Diretiva  ngSwitch, ngSwitchCase e ngSwitchDefault
 
-5. Serviços
+A diretiva **ngSwitch** é uma diretiva de estrutura do Angular que permite criar declarações condicionais no template com base em uma expressão. É uma maneira mais legível e organizada de criar lógicas condicionais do que usar várias diretivas ***ngIf**.
 
-- O que são serviços?
-- Como criar e injetar serviços
-- Utilização de serviços para compartilhar dados e lógica entre componentes
 
-6. Diretivas
+**Sintaxe do ngSwitch:**
 
-- O que são diretivas?
-- Diretivas incorporadas vs. diretivas personalizadas
-- Utilização de diretivas para manipular o DOM
+A sintaxe do **ngSwitch** é semelhante a um switch em JavaScript. A diretiva **ngSwitch** é aplicada a um elemento pai que contém vários elementos filhos **ngSwitchCase** e um elemento **ngSwitchDefault**.
 
-7. Templates
+```html
+<div [ngSwitch]="valorExpressao">
+  <div *ngSwitchCase="valor1">Conteúdo 1</div>
+  <div *ngSwitchCase="valor2">Conteúdo 2</div>
+  <div *ngSwitchCase="valor3">Conteúdo 3</div>
+  <div *ngSwitchDefault>Conteúdo padrão</div>
+</div>
+```
 
-- O que são templates no Angular?
-- Sintaxe do template do Angular
-- Interpolação e binding de dados
+1. O atributo **[ngSwitch]** recebe uma expressão que será comparada com os valores das **ngSwitchCase**.
+2. Cada elemento **ngSwitchCase** contém um valor que será comparado com a expressão do **ngSwitch**. O conteúdo do **ngSwitchCase** é renderizado se a expressão for igual ao valor do **ngSwitchCase**.
+3. O elemento **ngSwitchDefault** é opcional e é renderizado se a expressão não corresponder a nenhum dos valores nas **ngSwitchCase**.
 
-8. Data Binding
+Exemplo:
 
-- One-way data binding
-- Two-way data binding
-- Event binding
+```html
+<div [ngSwitch]="opcao">
+  <p *ngSwitchCase="'A'">Você escolheu a opção A</p>
+  <p *ngSwitchCase="'B'">Você escolheu a opção B</p>
+  <p *ngSwitchCase="'C'">Você escolheu a opção C</p>
+  <p *ngSwitchDefault>Escolha uma opção válida (A, B ou C).</p>
+</div>
+```
 
-9. Roteamento
+**Nota:**
 
-- Configuração do roteamento
-- Navegação entre componentes
-- Parâmetros de rota e rota filha
+Observe que o valor do **ngSwitchCase** está entre aspas simples, pois é uma string. Se você estiver usando números ou outras variáveis, não é necessário usar aspas.
 
-10. Formulários
 
-- Template-driven forms
-- Reactive forms
+Aplicando o ngSwitch com números:
 
-11. Comunicação entre Componentes
+```html
+<div [ngSwitch]="opcaoNumero">
+  <p *ngSwitchCase="1">Você escolheu a opção 1</p>
+  <p *ngSwitchCase="2">Você escolheu a opção 2</p>
+  <p *ngSwitchCase="3">Você escolheu a opção 3</p>
+  <p *ngSwitchDefault>Escolha uma opção válida (1, 2 ou 3).</p>
+</div>
+```
 
-- @Input e @Output decorators
-- Serviços para comunicação entre componentes
+#### Diretiva Personalizada
 
-12. HTTP Client
+Você também pode criar suas próprias Diretivas personalizadas no Angular. Para isso, você precisa usar a função @Directive e implementar o código necessário para a diretiva.
 
-- Interação com APIs RESTful
-- Métodos HTTP (GET, POST, PUT, DELETE)
+Exemplo de uma Diretiva de Atributo Personalizada:
 
-13. Gerenciamento de Estado
+```typescript
+import { Directive, ElementRef, HostListener } from '@angular/core';
 
-- Necessidade de gerenciamento de estado
-- Introdução ao NgRx (gerenciamento de estado com Redux)
+@Directive({
+  selector: '[appDestaque]' // Seletor para usar a diretiva no template.
+})
+export class DestaqueDirective {
+  constructor(private el: ElementRef) {}
 
-14. Testes
+  @HostListener('mouseenter') onMouseEnter() {
+    this.realcarTexto('yellow');
+  }
 
-- Importância dos testes
-- Testes unitários com Jasmine e Karma
-- Testes de integração
+  @HostListener('mouseleave') onMouseLeave() {
+    this.realcarTexto(null);
+  }
+
+  private realcarTexto(cor: string) {
+    this.el.nativeElement.style.backgroundColor = cor;
+  }
+}
+```
+
+Neste exemplo, criamos uma Diretiva de Atributo chamada **appDestaque**, que destaca o texto do elemento quando o mouse entra na área do elemento e remove o destaque quando o mouse sai.
+
+**Considerações Finais**
+
+As Diretivas são um recurso poderoso e versátil do Angular, permitindo que você crie comportamentos personalizados e reutilizáveis no template. Ao combinar Diretivas com os demais recursos do Angular, como Data Binding e Services, você pode criar aplicações web mais interativas e dinâmicas, facilitando a manutenção e o desenvolvimento de interfaces ricas para os usuários.
+
+## Prática 
