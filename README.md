@@ -1,189 +1,84 @@
-## Angular Componentes
+## Angular Services
 
-Os componentes são blocos de construção essenciais do Angular.   Eles desempenham um papel central na arquitetura do framework, permitindo que você crie partes reutilizáveis e independentes da interface do usuário, cada uma com sua própria lógica, template e estilo.
+Os serviços desempenham um papel fundamental na arquitetura do Angular, permitindo compartilhar lógica, dados e funcionalidades entre componentes de maneira eficiente e organizada. Eles são classes que podem ser injetadas em componentes, módulos e outros serviços, promovendo a reutilização de código e a separação de preocupações.
 
-### Criando um Componente
 
-Para criar um novo componente, você pode usar o Angular CLI (Command Line Interface) com o seguinte comando:
+### Criando um Serviço
+
+Para criar um novo serviço, você pode usar o Angular CLI com o seguinte comando:
 
 ```bash
-ng generate component nome-do-componente
+ng generate service nome-do-servico
 ```
 
-Isso criará uma estrutura de arquivos para o novo componente, incluindo um arquivo **.ts** (código do componente), **.html** (template) e **.css** (estilos), entre outros.
+Exemplo de um Serviço
+```typescript
+import { Injectable } from '@angular/core';
 
-**Estrutura de um Componente:**
+@Injectable({
+  providedIn: 'root' // Indica que o serviço será injetado no nível raiz (singleton).
+})
+export class MeuServico {
+  dados: string[] = [];
 
-O código de um componente em Angular consiste em três partes principais: 
+  adicionarDado(dado: string) {
+    this.dados.push(dado);
+  }
 
-- o decorator @Component
-- a classe do componente
-- o template associado.
+  obterDados(): string[] {
+    return this.dados;
+  }
+}
+```
 
-Exemplo:
+**Injetando um Serviço**
 
+Os serviços podem ser injetados em componentes, módulos ou outros serviços através do mecanismo de injeção de dependência do Angular.
+
+Exemplo de Injeção de Serviço em um Componente
 ```typescript
 import { Component } from '@angular/core';
+import { MeuServico } from './meu-servico.service';
 
 @Component({
-  selector: 'app-exemplo', // Seletor do componente, usado no template.
-  templateUrl: './exemplo.component.html', // Caminho do template do componente.
-  styleUrls: ['./exemplo.component.scss'] // Arquivos de estilo do componente.
+  selector: 'app-exemplo',
+  template: '<button (click)="adicionar()">Adicionar Dado</button>'
 })
 export class ExemploComponent {
-  // Lógica do componente aqui...
-}
-```
+  constructor(private meuServico: MeuServico) {}
 
-**Usando um Componente:**
-
-Você pode usar um componente em outros componentes ou templates usando o seletor definido no decorator @Component.
-
-Exemplo de Uso de um Componente:
-
-```html
-<app-exemplo></app-exemplo>
-```
-### Comunicação entre Componentes
-
-Os componentes podem se comunicar entre si através de inputs e outputs.
-
-**Inputs**: Permitem que um componente pai passe dados para um componente filho.
-
-```typescript
-import { Component, Input } from '@angular/core';
-
-@Component({
-  selector: 'app-filho',
-  template: '<p>{{ mensagem }}</p>'
-})
-export class FilhoComponent {
-  @Input() mensagem: string;
-}
-```
-
-```html
-<app-filho [mensagem]="mensagemDoPai"></app-filho>
-```
-
-**Outputs**: Permitem que um componente filho envie eventos para um componente pai.
-
-```typescript
-import { Component, Output, EventEmitter } from '@angular/core';
-
-@Component({
-  selector: 'app-filho',
-  template: '<button (click)="enviarMensagem()">Enviar Mensagem</button>'
-})
-export class FilhoComponent {
-  @Output() mensagemEnviada = new EventEmitter<void>();
-
-  enviarMensagem() {
-    this.mensagemEnviada.emit();
+  adicionar() {
+    this.meuServico.adicionarDado('Novo dado');
   }
 }
 ```
 
+**Uso de Serviços para Compartilhar Dados**
 
-```html
-<app-filho (mensagemEnviada)="acaoNoPai()"></app-filho>
-```
+Os serviços são excelentes para compartilhar dados e estados entre componentes. Eles atuam como um intermediário entre componentes, permitindo que um componente atualize os dados e outros componentes sejam notificados dessas alterações.
 
-
-### Ciclo de vida 
-
-O ciclo de vida de um componente Angular é composto por uma série de eventos que ocorrem desde a sua criação até a sua destruição.  Cada evento fornece a oportunidade de executar ações específicas em momentos-chave da vida útil do componente. 
-
-Aqui estão os principais eventos do ciclo de vida de um componente, acompanhados de exemplos que demonstram como eles podem ser usados:
-
-#### ngOnInit
-
-O evento ngOnInit é acionado logo após a inicialização de um componente. É um bom lugar para realizar inicializações, como buscar dados de um serviço ou configurar variáveis.
-
+Exemplo de Uso de um Serviço para Compartilhar Dados
 ```typescript
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
-@Component({
-  selector: 'app-exemplo',
-  template: '<p>{{ mensagem }}</p>'
+@Injectable({
+  providedIn: 'root'
 })
-export class ExemploComponent implements OnInit {
-  mensagem: string;
+export class DadosCompartilhadosService {
+  private dadosSubject = new BehaviorSubject<string>('');
 
-  ngOnInit() {
-    this.mensagem = 'Olá, mundo!';
+  atualizarDados(dados: string) {
+    this.dadosSubject.next(dados);
+  }
+
+  obterDados() {
+    return this.dadosSubject.asObservable();
   }
 }
 ```
+### Resumo
 
-#### ngOnChange
-
-O evento *ngOnChanges* é acionado sempre que um valor de entrada *(@Input)* é alterado. Ele fornece um objeto que contém as alterações detectadas.
-
-```typescript
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-
-@Component({
-  selector: 'app-filho',
-  template: '<p>{{ mensagem }}</p>'
-})
-export class FilhoComponent implements OnChanges {
-  @Input() mensagem: string;
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.mensagem) {
-      console.log('Valor de mensagem alterado para:', changes.mensagem.currentValue);
-    }
-  }
-}
-```
-
-#### ngDoCheck
-
-O evento *ngDoCheck* é acionado sempre que a detecção de mudanças é executada. Pode ser usado para realizar verificações manuais de mudanças.
-
-```typescript
-import { Component, DoCheck } from '@angular/core';
-
-@Component({
-  selector: 'app-exemplo',
-  template: '<p>{{ contador }}</p>'
-})
-export class ExemploComponent implements DoCheck {
-  contador: number = 0;
-
-  ngDoCheck() {
-    console.log('ngDoCheck executado.');
-    // Lógica para verificar mudanças manuais aqui...
-  }
-}
-```
-
-#### ngOnDestroy
-
-O evento *ngOnDestroy* é acionado quando um componente está prestes a ser destruído. É usado para realizar ações de limpeza, como cancelar inscrições, desconectar de serviços, etc.
-
-```typescript
-import { Component, OnDestroy } from '@angular/core';
-
-@Component({
-  selector: 'app-exemplo',
-  template: '<p>Componente será destruído em breve.</p>'
-})
-export class ExemploComponent implements OnDestroy {
-  ngOnDestroy() {
-    console.log('Componente destruído.');
-    // Ações de limpeza aqui...
-  }
-}
-```
-
-**Nota:**
-
-Lembre-se de que os eventos do ciclo de vida são opcionais e você não precisa implementar todos eles em cada componente. Escolha os eventos que são relevantes para o que você deseja alcançar e utilize-os conforme necessário.
-
-Além dos métodos principais do ciclo de vida do Angular, como *ngOnInit*, *ngOnChanges*, *ngDoCheck* e *ngOnDestroy*, existem outros métodos, como **ngAfterContentInit**, **ngAfterContentChecked**, **ngAfterViewInit** e **ngAfterViewChecked**, que oferecem oportunidades para interagir com o conteúdo projetado e a visualização do componente. Compreender e utilizar esses métodos adequadamente permitirá que você controle e otimize a lógica do seu componente em várias fases do ciclo de vida. 
-
-
+Os serviços desempenham um papel crucial no desenvolvimento de aplicativos Angular, permitindo a reutilização de código, a separação de preocupações e o compartilhamento eficiente de dados e funcionalidades entre componentes. Ao criar e utilizar serviços adequadamente, você pode criar uma arquitetura mais modular, flexível e escalável para suas aplicações.
 
 ## Prática 
