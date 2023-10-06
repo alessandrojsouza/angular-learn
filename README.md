@@ -1,10 +1,10 @@
-<p  align="center">
+<div  align="center">
     <img width="200"
         alt="Angular Logo"
         src="https://www.svgrepo.com/show/378486/angular-fill.svg"
       />
     <h1> Desenvolvimeno de Interfaces com Angular</h1>
-</p>
+</div>
 
 ## Objetivo
 
