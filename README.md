@@ -2,7 +2,7 @@
 
 ### O que é o Angular?
 
-O Angular é uma plataforma e um framework para construir aplicações cliente em HTML, CSS e JavaScript/TypeScript. Ele utiliza a abordagem de SPA (Single Page Application), permitindo que a aplicação seja carregada uma vez e, em seguida, as mudanças de conteúdo ocorram dinamicamente sem recarregar a página.
+O Angular é um framework para construir aplicações cliente em HTML, CSS e JavaScript/TypeScript. Ele utiliza a abordagem de SPA (**_Single Page Application_**), permitindo que a aplicação seja carregada uma vez e, em seguida, as mudanças de conteúdo ocorram dinamicamente sem recarregar a página.
 
 ### Por que usar o Angular?
 
@@ -22,7 +22,7 @@ O Angular é uma plataforma e um framework para construir aplicações cliente e
 
 ### Arquitetura do Angular
 
-A arquitetura do Angular é baseada em alguns conceitos fundamentais, como componentes, módulos, serviços e diretivas. Esses elementos são combinados para criar uma estrutura sólida e modular para desenvolver aplicações web com eficiência e escalabilidade.
+A arquitetura do Angular é baseada em alguns conceitos fundamentais, como **_componentes_**, **_módulos_**, **_serviços_** e **_diretivas_**. Esses elementos são combinados para criar uma estrutura sólida e modular para desenvolver aplicações web com eficiência e escalabilidade.
 
 1. **Componentes**:
 
