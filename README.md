@@ -237,10 +237,9 @@ Aqui está a sugestão para a prática:
 
 **Tema do Projeto**: Lista de Tarefas
 
-**Descrição**: Criar os templates para uma aplicação de Lista de Tarefas (To-Do List), onde os usuários podem adicionar, marcar como concluídas e remover tarefas. A aplicação deve ser desenvolvida usando o framework Angular, aplicando os conceitos aprendidos na aula.
+**Descrição**: Criar um projeto Angular para iniciar a construção de uma aplicação de Lista de Tarefas (To-Do List), aplicando os conceitos aprendido nesta aula.
 
 *Requisitos*:
 
-- A aplicação deve ter um componente principal que representará a Lista de Tarefas.
-- O template deve permitir gerenciar as tarefas (adicionar, marcar como concluída, remover).
-- Use [BootStrapCDN](https://getbootstrap.com.br/docs/4.1/getting-started/introduction/) para estilizar o projeto.
+- Construa seu ambinete de desenvolvimento no Windows, Linux ou WLS2
+- A aplicação deve ter a estrutura padrão de um projeto Angular.
