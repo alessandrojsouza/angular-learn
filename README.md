@@ -2,9 +2,9 @@
 
 ### O que é Data Binding?
 
-O Data Binding é uma das funcionalidades mais fundamentais do Angular. Ele permite que você conecte os dados do modelo (classe do componente) com a interface do usuário (template), permitindo que as alterações feitas nos dados sejam refletidas automaticamente na interface do usuário e vice-versa.
+O Data Binding é uma das funcionalidades fundamentais do Angular. Ele permite que você conecte os dados do modelo (**classe do componente**) com o template (**interface do usuário**), permitindo que as alterações feitas nos dados sejam refletidas automaticamente na interface do usuário e vice-versa.
 
-Existem quatro tipos principais de data binding no Angular: Interpolation; Property Binding; Event Binding; Two-Way Binding. 
+Existem quatro tipos principais de data binding no Angular: _Interpolation_; _Property Binding_; _Event Binding_; _Two-Way Binding_. 
 
 ### Interpolation `{{ }}`
 
