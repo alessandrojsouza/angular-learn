@@ -6,5 +6,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-learn';
+  title = 'Aula 01 - Data Binding ';
+
+  placeholderPropertie : String = "Valor inicial do modelo"
+
+  textoDoInput : String = "Texto do Input..."
+
+  isMouseOverClass : Boolean = false
+
+  isMouseOverStyle : Boolean = false
+
+  acionaAlerta(){
+    alert ('Evento de click disparado')
+  }
+
+  onMouserOverOutClass(){
+    this.isMouseOverClass = !this.isMouseOverClass
+  }
+
+  onMouserOverOutStyle(){
+    this.isMouseOverStyle = !this.isMouseOverStyle
+  }
+
 }
