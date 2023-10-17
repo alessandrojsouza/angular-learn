@@ -1,8 +1,8 @@
 ## Angular Diretivas
 
-As Diretivas são uma parte fundamental do Angular, permitindo estender a sintaxe HTML para **adicionar comportamentos** personalizados aos elementos da página. 
+As Diretivas são uma parte fundamental do Angular, permitindo estender a sintaxe HTML para **adicionar comportamentos** personalizados aos elementos da página.
 
-Existem três tipos principais de diretivas no Angular: 
+Existem três tipos principais de diretivas no Angular:
 
 - Diretivas de Atributo
 - Diretivas de Estrutura
@@ -12,15 +12,22 @@ Existem três tipos principais de diretivas no Angular:
 
 As Diretivas de Atributo são usadas para alterar o comportamento de elementos HTML existentes, adicionando ou modificando atributos e comportamentos. Elas são aplicadas como atributos de elementos no template.
 
-Exemplo:
+Exemplos:
 
 ```html
-<!-- Diretiva de Atributo -->
-<p [appDestaque]="destacarTexto">Este parágrafo será destacado</p>
-
+<!-- Diretiva de Atributo ngStyle-->
+<p [ngStyle]="{'background': isBlue ? 'blue' : 'red'}">Eu sou uma diretiva de atributo</p>
 ```
 
-Aqui, **'appDestaque'** é uma Diretiva de Atributo personalizada que altera o estilo do parágrafo quando **'destacarTexto'** for verdadeiro.
+```html
+<!--Diretiva de atributo ngClass-->
+<p [ngClass]="{'fundo-verde': isFlag, 'fundo-azul': !isFlag}">Diretiva de Atributo - [ngClass]</p>
+```
+
+As diretivas **NgStyle** e **NgClass** são diretivas de atributo usadas para alterar o estilo de qualquer elemento do DOM com base em alguma condição.
+
+[Documentação Oficial para NgStyle](https://angular.io/api/common/NgIf)
+[Documentação Oficial para NgClass](https://angular.io/api/common/NgClass)
 
 ### Diretivas de Estrutura
 
@@ -32,44 +39,40 @@ Exemplo:
 
 ```html
 <!-- Diretiva de Estrutura -->
-<div *ngIf="mostrarElemento">
-  Este elemento só será exibido se mostrarElemento for verdadeiro.
-</div>
-
+<div *ngIf="mostrarElemento">Este elemento só será exibido se mostrarElemento for verdadeiro.</div>
 ```
 
-Aqui, **'*ngIf'** é uma Diretiva de Estrutura que adiciona ou remove o elemento <div> com base no valor de **'mostrarElemento'**.
+Aqui, **'\*ngIf'** é uma Diretiva de Estrutura que adiciona ou remove o elemento <div> com base no valor de **'mostrarElemento'**.
+
+[Documentação Oficial NgIf](https://angular.io/api/common/NgIf)
 
 #### Diretiva ngFor
 
-A diretiva ***ngFor** é uma das diretivas de estrutura mais utilizadas no Angular. Ela permite iterar sobre uma coleção de elementos e renderizá-los no template. Com o *ngFor, você pode criar listas dinâmicas, tabelas ou exibir repetidamente elementos com base nos dados do modelo.
+A diretiva **\*ngFor** é uma das diretivas de estrutura mais utilizadas no Angular. Ela permite iterar sobre uma coleção de elementos e renderizá-los no template. Com o \*ngFor, você pode criar listas dinâmicas, tabelas ou exibir repetidamente elementos com base nos dados do modelo.
 
 Exemplo:
 
-A sintaxe do *ngFor é simples e consiste em atribuir uma variável local para cada item da coleção que você deseja iterar. A diretiva pode ser aplicada a qualquer elemento HTML no template.
+A sintaxe do \*ngFor é simples e consiste em atribuir uma variável local para cada item da coleção que você deseja iterar. A diretiva pode ser aplicada a qualquer elemento HTML no template.
 
 ```html
-<div *ngFor="let item of itens">
-  {{ item }}
-</div>
+<div *ngFor="let item of itens">{{ item }}</div>
 ```
 
-Neste exemplo, estamos iterando sobre uma coleção chamada *itens*, e para cada item na coleção, o template renderizará um novo **<div>** contendo o valor do item.
+Neste exemplo, estamos iterando sobre uma coleção chamada _itens_, e para cada item na coleção, o template renderizará um novo **<div>** contendo o valor do item.
 
 **Índice de Itens:** Além do valor do item, é possível acessar o índice do item no loop e rastrear os itens por uma propriedade exclusiva.
 
 Acessando o Índice:
 
 ```html
-<div *ngFor="let item of itens; let i = index">
-  Item {{ i }}: {{ item }}
-</div>
+<div *ngFor="let item of itens; let i = index">Item {{ i }}: {{ item }}</div>
 ```
 
-#### Diretiva  ngSwitch, ngSwitchCase e ngSwitchDefault
+[Documentação Oficial NgFor](https://angular.io/api/common/NgFor)
 
-A diretiva **ngSwitch** é uma diretiva de estrutura do Angular que permite criar declarações condicionais no template com base em uma expressão. É uma maneira mais legível e organizada de criar lógicas condicionais do que usar várias diretivas ***ngIf**.
+#### Diretiva ngSwitch, ngSwitchCase e ngSwitchDefault
 
+A diretiva **ngSwitch** é uma diretiva de estrutura do Angular que permite criar declarações condicionais no template com base em uma expressão. É uma maneira mais legível e organizada de criar lógicas condicionais do que usar várias diretivas **\*ngIf**.
 
 **Sintaxe do ngSwitch:**
 
@@ -103,7 +106,6 @@ Exemplo:
 
 Observe que o valor do **ngSwitchCase** está entre aspas simples, pois é uma string. Se você estiver usando números ou outras variáveis, não é necessário usar aspas.
 
-
 Aplicando o ngSwitch com números:
 
 ```html
@@ -122,19 +124,19 @@ Você também pode criar suas próprias Diretivas personalizadas no Angular. Par
 Exemplo de uma Diretiva de Atributo Personalizada:
 
 ```typescript
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener } from "@angular/core";
 
 @Directive({
-  selector: '[appDestaque]' // Seletor para usar a diretiva no template.
+  selector: "[appDestaque]", // Seletor para usar a diretiva no template.
 })
 export class DestaqueDirective {
   constructor(private el: ElementRef) {}
 
-  @HostListener('mouseenter') onMouseEnter() {
-    this.realcarTexto('yellow');
+  @HostListener("mouseenter") onMouseEnter() {
+    this.realcarTexto("yellow");
   }
 
-  @HostListener('mouseleave') onMouseLeave() {
+  @HostListener("mouseleave") onMouseLeave() {
     this.realcarTexto(null);
   }
 
@@ -144,10 +146,24 @@ export class DestaqueDirective {
 }
 ```
 
+Exemplo:
+
+```html
+<!-- Diretiva de Atributo -->
+<p [appDestaque]="destacarTexto">Este parágrafo será destacado</p>
+```
+
+Aqui, **'appDestaque'** é uma Diretiva de Atributo personalizada que altera o estilo do parágrafo quando **'destacarTexto'** for verdadeiro.
 Neste exemplo, criamos uma Diretiva de Atributo chamada **appDestaque**, que destaca o texto do elemento quando o mouse entra na área do elemento e remove o destaque quando o mouse sai.
+
+Use o comando abaixo para criar diretivas.
+
+```node
+ng generete directive <nomeDaDiretiva>
+```
 
 **Considerações Finais**
 
 As Diretivas são um recurso poderoso e versátil do Angular, permitindo que você crie comportamentos personalizados e reutilizáveis no template. Ao combinar Diretivas com os demais recursos do Angular, como Data Binding e Services, você pode criar aplicações web mais interativas e dinâmicas, facilitando a manutenção e o desenvolvimento de interfaces ricas para os usuários.
 
-## Prática 
+## Prática
