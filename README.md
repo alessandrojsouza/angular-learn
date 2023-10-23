@@ -49,7 +49,9 @@ Exemplo de Uso de um Componente:
 
 Os componentes podem se comunicar entre si através de inputs e outputs.
 
-**Inputs**: Permitem que um componente pai passe dados para um componente filho.
+#### Inputs:
+
+Permitem que um componente pai passe dados para um componente filho.
 
 ```typescript
 import { Component, Input } from "@angular/core";
@@ -67,7 +69,9 @@ export class FilhoComponent {
 <app-filho [mensagem]="mensagemDoPai"></app-filho>
 ```
 
-**Outputs**: Permitem que um componente filho envie eventos para um componente pai.
+#### Outputs:
+
+Permitem que um componente filho envie eventos para um componente pai.
 
 _Configuração do componente filho._
 
