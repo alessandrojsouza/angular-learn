@@ -1,6 +1,6 @@
 ## Angular Componentes
 
-Os componentes são blocos de construção essenciais do Angular.   Eles desempenham um papel central na arquitetura do framework, permitindo que você crie partes reutilizáveis e independentes da interface do usuário, cada uma com sua própria lógica, template e estilo.
+Os componentes são blocos de construção essenciais do Angular. Eles desempenham um papel central na arquitetura do framework, permitindo que você crie partes reutilizáveis e independentes da interface do usuário, cada uma com sua própria lógica, template e estilo.
 
 ### Criando um Componente
 
@@ -14,7 +14,7 @@ Isso criará uma estrutura de arquivos para o novo componente, incluindo um arqu
 
 **Estrutura de um Componente:**
 
-O código de um componente em Angular consiste em três partes principais: 
+O código de um componente em Angular consiste em três partes principais:
 
 - o decorator @Component
 - a classe do componente
@@ -23,12 +23,12 @@ O código de um componente em Angular consiste em três partes principais:
 Exemplo:
 
 ```typescript
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-exemplo', // Seletor do componente, usado no template.
-  templateUrl: './exemplo.component.html', // Caminho do template do componente.
-  styleUrls: ['./exemplo.component.scss'] // Arquivos de estilo do componente.
+  selector: "app-exemplo", // Seletor do componente, usado no template.
+  templateUrl: "./exemplo.component.html", // Caminho do template do componente.
+  styleUrls: ["./exemplo.component.scss"], // Arquivos de estilo do componente.
 })
 export class ExemploComponent {
   // Lógica do componente aqui...
@@ -44,6 +44,7 @@ Exemplo de Uso de um Componente:
 ```html
 <app-exemplo></app-exemplo>
 ```
+
 ### Comunicação entre Componentes
 
 Os componentes podem se comunicar entre si através de inputs e outputs.
@@ -51,11 +52,11 @@ Os componentes podem se comunicar entre si através de inputs e outputs.
 **Inputs**: Permitem que um componente pai passe dados para um componente filho.
 
 ```typescript
-import { Component, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-filho',
-  template: '<p>{{ mensagem }}</p>'
+  selector: "app-filho",
+  template: "<p>{{ mensagem }}</p>",
 })
 export class FilhoComponent {
   @Input() mensagem: string;
@@ -69,11 +70,11 @@ export class FilhoComponent {
 **Outputs**: Permitem que um componente filho envie eventos para um componente pai.
 
 ```typescript
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'app-filho',
-  template: '<button (click)="enviarMensagem()">Enviar Mensagem</button>'
+  selector: "app-filho",
+  template: '<button (click)="enviarMensagem()">Enviar Mensagem</button>',
 })
 export class FilhoComponent {
   @Output() mensagemEnviada = new EventEmitter<void>();
@@ -84,15 +85,13 @@ export class FilhoComponent {
 }
 ```
 
-
 ```html
 <app-filho (mensagemEnviada)="acaoNoPai()"></app-filho>
 ```
 
+### Ciclo de vida
 
-### Ciclo de vida 
-
-O ciclo de vida de um componente Angular é composto por uma série de eventos que ocorrem desde a sua criação até a sua destruição.  Cada evento fornece a oportunidade de executar ações específicas em momentos-chave da vida útil do componente. 
+O ciclo de vida de um componente Angular é composto por uma série de eventos que ocorrem desde a sua criação até a sua destruição. Cada evento fornece a oportunidade de executar ações específicas em momentos-chave da vida útil do componente.
 
 Aqui estão os principais eventos do ciclo de vida de um componente, acompanhados de exemplos que demonstram como eles podem ser usados:
 
@@ -101,38 +100,38 @@ Aqui estão os principais eventos do ciclo de vida de um componente, acompanhado
 O evento ngOnInit é acionado logo após a inicialização de um componente. É um bom lugar para realizar inicializações, como buscar dados de um serviço ou configurar variáveis.
 
 ```typescript
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-exemplo',
-  template: '<p>{{ mensagem }}</p>'
+  selector: "app-exemplo",
+  template: "<p>{{ mensagem }}</p>",
 })
 export class ExemploComponent implements OnInit {
   mensagem: string;
 
   ngOnInit() {
-    this.mensagem = 'Olá, mundo!';
+    this.mensagem = "Olá, mundo!";
   }
 }
 ```
 
 #### ngOnChange
 
-O evento *ngOnChanges* é acionado sempre que um valor de entrada *(@Input)* é alterado. Ele fornece um objeto que contém as alterações detectadas.
+O evento _ngOnChanges_ é acionado sempre que um valor de entrada _(@Input)_ é alterado. Ele fornece um objeto que contém as alterações detectadas.
 
 ```typescript
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 
 @Component({
-  selector: 'app-filho',
-  template: '<p>{{ mensagem }}</p>'
+  selector: "app-filho",
+  template: "<p>{{ mensagem }}</p>",
 })
 export class FilhoComponent implements OnChanges {
   @Input() mensagem: string;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.mensagem) {
-      console.log('Valor de mensagem alterado para:', changes.mensagem.currentValue);
+      console.log("Valor de mensagem alterado para:", changes.mensagem.currentValue);
     }
   }
 }
@@ -140,20 +139,20 @@ export class FilhoComponent implements OnChanges {
 
 #### ngDoCheck
 
-O evento *ngDoCheck* é acionado sempre que a detecção de mudanças é executada. Pode ser usado para realizar verificações manuais de mudanças.
+O evento _ngDoCheck_ é acionado sempre que a detecção de mudanças é executada. Pode ser usado para realizar verificações manuais de mudanças.
 
 ```typescript
-import { Component, DoCheck } from '@angular/core';
+import { Component, DoCheck } from "@angular/core";
 
 @Component({
-  selector: 'app-exemplo',
-  template: '<p>{{ contador }}</p>'
+  selector: "app-exemplo",
+  template: "<p>{{ contador }}</p>",
 })
 export class ExemploComponent implements DoCheck {
   contador: number = 0;
 
   ngDoCheck() {
-    console.log('ngDoCheck executado.');
+    console.log("ngDoCheck executado.");
     // Lógica para verificar mudanças manuais aqui...
   }
 }
@@ -161,18 +160,18 @@ export class ExemploComponent implements DoCheck {
 
 #### ngOnDestroy
 
-O evento *ngOnDestroy* é acionado quando um componente está prestes a ser destruído. É usado para realizar ações de limpeza, como cancelar inscrições, desconectar de serviços, etc.
+O evento _ngOnDestroy_ é acionado quando um componente está prestes a ser destruído. É usado para realizar ações de limpeza, como cancelar inscrições, desconectar de serviços, etc.
 
 ```typescript
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from "@angular/core";
 
 @Component({
-  selector: 'app-exemplo',
-  template: '<p>Componente será destruído em breve.</p>'
+  selector: "app-exemplo",
+  template: "<p>Componente será destruído em breve.</p>",
 })
 export class ExemploComponent implements OnDestroy {
   ngOnDestroy() {
-    console.log('Componente destruído.');
+    console.log("Componente destruído.");
     // Ações de limpeza aqui...
   }
 }
@@ -182,8 +181,18 @@ export class ExemploComponent implements OnDestroy {
 
 Lembre-se de que os eventos do ciclo de vida são opcionais e você não precisa implementar todos eles em cada componente. Escolha os eventos que são relevantes para o que você deseja alcançar e utilize-os conforme necessário.
 
-Além dos métodos principais do ciclo de vida do Angular, como *ngOnInit*, *ngOnChanges*, *ngDoCheck* e *ngOnDestroy*, existem outros métodos, como **ngAfterContentInit**, **ngAfterContentChecked**, **ngAfterViewInit** e **ngAfterViewChecked**, que oferecem oportunidades para interagir com o conteúdo projetado e a visualização do componente. Compreender e utilizar esses métodos adequadamente permitirá que você controle e otimize a lógica do seu componente em várias fases do ciclo de vida. 
+Além dos métodos principais do ciclo de vida do Angular, como _ngOnInit_, _ngOnChanges_, _ngDoCheck_ e _ngOnDestroy_, existem outros métodos, como **ngAfterContentInit**, **ngAfterContentChecked**, **ngAfterViewInit** e **ngAfterViewChecked**, que oferecem oportunidades para interagir com o conteúdo projetado e a visualização do componente. Compreender e utilizar esses métodos adequadamente permitirá que você controle e otimize a lógica do seu componente em várias fases do ciclo de vida.
 
+## Prática
 
+Aqui está a sugestão para a prática:
 
-## Prática 
+**Tema do Projeto:** Lista de Tarefas
+
+**Descrição:** Criar uma aplicação de Lista de Tarefas (To-Do List), onde os usuários podem adicionar, marcar como concluídas e remover tarefas. A aplicação deve ser desenvolvida usando o framework Angular, aplicando os conceitos aprendidos na aula.
+
+**Requisitos:**
+
+- Criar um componente para o header do sistema;
+- Criar um componente para o input de inclusão de tarefas;
+- Criar um componente de apresentação das tarefas em uma tabela.

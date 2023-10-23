@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-learn';
+  title = 'Mensagem passada pela classe do componente Pai!!';
+  isVisible = false;
+
+  onClickAlert(msg : string){
+    alert(msg);
+  }
 }
