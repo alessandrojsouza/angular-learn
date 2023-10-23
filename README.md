@@ -69,27 +69,57 @@ export class FilhoComponent {
 
 **Outputs**: Permitem que um componente filho envie eventos para um componente pai.
 
+_Configuração do componente filho._
+
 ```typescript
 import { Component, Output, EventEmitter } from "@angular/core";
 
 @Component({
+<<<<<<< HEAD
   selector: "app-filho",
   template: '<button (click)="enviarMensagem()">Enviar Mensagem</button>',
+=======
+  selector: 'app-filho',
+  template: '<button (click)="onClickEnviar()">Enviar Mensagem</button>'
+>>>>>>> 63a57635714f8959d4c5aa1c824f5372a8376c38
 })
 export class FilhoComponent {
-  @Output() mensagemEnviada = new EventEmitter<void>();
+  @Output() mensagemOutEvent = new EventEmitter<string>();
 
-  enviarMensagem() {
-    this.mensagemEnviada.emit();
+  onClickEnviar() {
+    this.mensagemOutEvent.emit('Mensagem do Filho');
   }
 }
 ```
 
+# <<<<<<< HEAD
+
+_Configuração do componente pai - template._
+
+> > > > > > > 63a57635714f8959d4c5aa1c824f5372a8376c38
+
 ```html
-<app-filho (mensagemEnviada)="acaoNoPai()"></app-filho>
+<app-filho (mensagemOutEvent)="acaoNoPai($event)"></app-filho>
 ```
 
+<<<<<<< HEAD
+
 ### Ciclo de vida
+
+=======
+_Configuração do componente pai - classe._
+
+```typescript
+...
+acaoNoPai(evento:string):void {
+    alert(evento)
+  }
+...
+```
+
+Para mais informações sobre comunicação entre componentes ver documentação do Angular em [https://angular.io/guide/inputs-outputs](https://angular.io/guide/inputs-outputs)
+
+> > > > > > > 63a57635714f8959d4c5aa1c824f5372a8376c38
 
 O ciclo de vida de um componente Angular é composto por uma série de eventos que ocorrem desde a sua criação até a sua destruição. Cada evento fornece a oportunidade de executar ações específicas em momentos-chave da vida útil do componente.
 
