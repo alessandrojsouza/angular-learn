@@ -98,6 +98,8 @@ acaoNoPai(evento:string):void {
   }
 ...
 ```
+Para mais informações sobre comunicação entre componentes ver documentação do Angular em [https://angular.io/guide/inputs-outputs](https://angular.io/guide/inputs-outputs)
+
 ### Ciclo de vida 
 
 O ciclo de vida de um componente Angular é composto por uma série de eventos que ocorrem desde a sua criação até a sua destruição.  Cada evento fornece a oportunidade de executar ações específicas em momentos-chave da vida útil do componente. 
