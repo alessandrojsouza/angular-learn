@@ -167,3 +167,13 @@ ng generete directive <nomeDaDiretiva>
 As Diretivas são um recurso poderoso e versátil do Angular, permitindo que você crie comportamentos personalizados e reutilizáveis no template. Ao combinar Diretivas com os demais recursos do Angular, como Data Binding e Services, você pode criar aplicações web mais interativas e dinâmicas, facilitando a manutenção e o desenvolvimento de interfaces ricas para os usuários.
 
 ## Prática
+
+Aqui está a sugestão para a prática:
+
+**Tema do Projeto:** Lista de Tarefas
+
+**Descrição:** Criar uma aplicação de Lista de Tarefas (To-Do List), onde os usuários podem adicionar, marcar como concluídas e remover tarefas. A aplicação deve ser desenvolvida usando o framework Angular, aplicando os conceitos aprendidos na aula.
+
+**Requisitos:**
+
+- Incluir os conceitos de diretivas (ngIF e ngFor) na aplicação.
