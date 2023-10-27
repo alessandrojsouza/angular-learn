@@ -19,17 +19,12 @@ export class ProductsComponent implements OnInit {
   constructor(private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      let id = params.get('id');
-      if(id != null){
-        this.lista = this.lista.filter(item => item.id !== Number(id));
-      }
-    })
+    //pegar o parametro da rota
+    console.log('ngOnInit');
+    this.delete();
+    this.find();
   }
 
-  delete(){
-
-  }
 
   onChange(value:string){
     if(value == '')
@@ -39,11 +34,25 @@ export class ProductsComponent implements OnInit {
         {id:3,name:'Caderno',price:300,stock:30},
       ];
   }
-
-  find(value:string){
-     //filtrar se o campo estiver preenchido
-    if(value != '')
-      this.lista = this.lista.filter(x => x.name.toLowerCase().includes(value.toLowerCase()));
+  //Pesquisar por nome
+  find(){
+    console.log('find');
+    this.route.queryParams.subscribe(params => {
+      let filter = params['filter'];
+      if(filter != null){
+        console.log('filter', filter);
+        this.lista = this.lista.filter(x => x.name.toLowerCase().includes(filter.toLowerCase()));
+      }
+    });
   }
-
+  //Metodo para deletar
+  delete(){
+    console.log('delete');
+    this.route.paramMap.subscribe(params => {
+      let id = params.get('id');
+      if(id != null){
+        this.lista = this.lista.filter(item => item.id !== Number(id));
+      }
+    });
+  }
 }

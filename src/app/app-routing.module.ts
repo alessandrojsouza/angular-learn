@@ -8,7 +8,7 @@ import { AboutComponent } from './views/about/about.component';
 const routes: Routes = [
   {path:'products', component: ProductsComponent},
   {path:'about',component:AboutComponent},
-  {path:'detailProduct/:id',component:AppComponent},
+  {path:'search',component:ProductsComponent},
   {path:'delete/:id',component:ProductsComponent},
 ];
 

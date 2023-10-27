@@ -226,3 +226,13 @@ export class AutenticacaoGuard implements CanActivate {
 ```
 
 ## Prática
+
+Aqui está a sugestão para a prática:
+
+**Tema do Projeto:** Lista de Tarefas
+
+**Descrição:** Criar uma aplicação de Lista de Tarefas (To-Do List), onde os usuários podem adicionar, marcar como concluídas e remover tarefas. A aplicação deve ser desenvolvida usando o framework Angular, aplicando os conceitos aprendidos na aula.
+
+**Requisitos:**
+
+- Criar as rotas para os componentes do sistema;

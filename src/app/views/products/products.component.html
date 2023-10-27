@@ -6,9 +6,12 @@
       (change)="onChange(input.value)"
       type="text" class="form-control" placeholder="Digite o nome do produto a ser pesquisado aqui..." aria-label="Recipient's username" aria-describedby="button-addon2">
     <div class="input-group-append">
-      <button
-        (click)="find(input.value)"
-        class="btn btn-outline-secondary" type="button" id="button-addon2">Pesquisar</button>
+      <a
+        [routerLink]="['/search']"
+        [queryParams]="{filter: input.value}"
+        class="btn btn-primary" href="#" role="button">
+        Pesquisar
+      </a>
     </div>
   </div>
 </div>
@@ -33,8 +36,8 @@
         <td>{{item.price}}</td>
         <td>{{item.stock}}</td>
         <td>
-          <a routerLink="/detailProduct/{{item.id}}">Detalhar</a>
-          | <a routerLink="/delete/{{item.id}}">Excluir</a>
+          <!--a routerLink="/detailProduct/{{item.id}}">Detalhar</!--a-->
+          <a routerLink="/delete/{{item.id}}">Excluir</a>
         </td>
       </tr>
     </tbody>
