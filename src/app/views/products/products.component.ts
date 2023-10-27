@@ -11,15 +11,18 @@ import { Product } from 'src/app/models/product';
 export class ProductsComponent implements OnInit {
 
   lista :  Product[] = [
-    {id:1,name:'Caneta',price:100,stock:10},
-    {id:2,name:'Livro',price:200,stock:20},
-    {id:3,name:'Caderno',price:300,stock:30},
+
   ];
 
   constructor(private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     //pegar o parametro da rota
+    this.lista = [
+      {id:1,name:'Caneta',price:100,stock:10},
+      {id:2,name:'Livro',price:200,stock:20},
+      {id:3,name:'Caderno',price:300,stock:30},
+    ]
     console.log('ngOnInit');
     this.delete();
     this.find();

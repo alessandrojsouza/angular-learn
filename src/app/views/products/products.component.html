@@ -4,7 +4,9 @@
     <input
       #input
       (change)="onChange(input.value)"
-      type="text" class="form-control" placeholder="Digite o nome do produto a ser pesquisado aqui..." aria-label="Recipient's username" aria-describedby="button-addon2">
+      type="text" class="form-control"
+      placeholder="Digite o nome do produto a ser pesquisado aqui..."
+      aria-label="Recipient's username" aria-describedby="button-addon2">
     <div class="input-group-append">
       <a
         [routerLink]="['/search']"
