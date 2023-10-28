@@ -235,4 +235,7 @@ Aqui está a sugestão para a prática:
 
 **Requisitos:**
 
-- Criar as rotas para os componentes do sistema;
+- Crie uma rota para cadastro de tarefas;
+- Crie uma rota para excluir uma tarefa;
+- Crie uma rota para marcar uma tarega como concluida;
+- Crie uma rota para visualizar as terfas cadastradas;
