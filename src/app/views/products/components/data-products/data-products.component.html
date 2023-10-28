@@ -1,0 +1,25 @@
+<div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Estoque</th>
+          <th scope="col">Ação</th>
+         </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of lista">
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.stock}}</td>
+          <td>
+            <!--a routerLink="/detailProduct/{{item.id}}">Detalhar</!--a-->
+            <a routerLink="/delete/{{item.id}}">Excluir</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

@@ -7,13 +7,17 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ProductsComponent } from './views/products/products.component';
 import { AboutComponent } from './views/about/about.component';
 import { FormsModule } from '@angular/forms';
+import { InputFindComponent } from './views/products/components/input-find/input-find.component';
+import { DataProductsComponent } from './views/products/components/data-products/data-products.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ProductsComponent,
-    AboutComponent
+    AboutComponent,
+    InputFindComponent,
+    DataProductsComponent
   ],
   imports: [
     BrowserModule,

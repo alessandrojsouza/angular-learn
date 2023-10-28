@@ -1,46 +1,7 @@
 <!--Div de pesquisa-->
-<div class="row justify-content-center">
-  <div class="input-group col-10">
-    <input
-      [(ngModel)] = "parm"
-      type="text" class="form-control"
-      placeholder="Digite o nome do produto a ser pesquisado aqui..."
-      aria-label="Recipient's username" aria-describedby="button-addon2">
-    <div class="input-group-append">
-      <a
-        [routerLink]="['/search']"
-        [queryParams]="{ filter: parm, operation: 'find' }"
-        class="btn btn-primary" role="button">
-        Pesquisar
-      </a>
-    </div>
-  </div>
-</div>
+<app-input-find></app-input-find>
 <p></p>
 
-<!--Div de dados-->
-<div class="row">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Preço</th>
-        <th scope="col">Estoque</th>
-        <th scope="col">Ação</th>
-       </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of lista">
-        <th scope="row">{{item.id}}</th>
-        <td>{{item.name}}</td>
-        <td>{{item.price}}</td>
-        <td>{{item.stock}}</td>
-        <td>
-          <!--a routerLink="/detailProduct/{{item.id}}">Detalhar</!--a-->
-          <a routerLink="/delete/{{item.id}}">Excluir</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<!--Div/tabela de dados-->
+<app-data-products [lista]="lista"></app-data-products>
+

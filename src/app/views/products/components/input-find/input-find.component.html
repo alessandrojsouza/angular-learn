@@ -1,0 +1,17 @@
+<div class="row justify-content-center">
+    <div class="input-group col-10">
+      <input
+        [(ngModel)] = "parm"
+        type="text" class="form-control"
+        placeholder="Digite o nome do produto a ser pesquisado aqui..."
+        aria-label="Recipient's username" aria-describedby="button-addon2">
+      <div class="input-group-append">
+        <a
+          [routerLink]="['/search']"
+          [queryParams]="{ filter: parm, operation: 'find' }"
+          class="btn btn-primary" role="button">
+          Pesquisar
+        </a>
+      </div>
+    </div>
+  </div>
