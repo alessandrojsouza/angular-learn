@@ -81,4 +81,15 @@ export class DadosCompartilhadosService {
 
 Os serviços desempenham um papel crucial no desenvolvimento de aplicativos Angular, permitindo a reutilização de código, a separação de preocupações e o compartilhamento eficiente de dados e funcionalidades entre componentes. Ao criar e utilizar serviços adequadamente, você pode criar uma arquitetura mais modular, flexível e escalável para suas aplicações.
 
-## Prática 
+## Prática
+
+Aqui está a sugestão para a prática:
+
+**Tema do Projeto:** Lista de Tarefas
+
+**Descrição:** Criar uma aplicação de Lista de Tarefas (To-Do List), onde os usuários podem adicionar, marcar como concluídas e remover tarefas. A aplicação deve ser desenvolvida usando o framework Angular, aplicando os conceitos aprendidos na aula.
+
+**Requisitos:**
+
+- Crie uma classe de serviço para concentrar as chamadas a API do To-do list;
+- Crie uma API para o To-Do List com JSON-Server (https://www.npmjs.com/package/json-server) 
