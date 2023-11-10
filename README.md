@@ -44,6 +44,10 @@ Exemplo
 
 A validação ocorre automaticamente de acordo com as diretivas aplicadas aos campos de entrada. Se um campo obrigatório estiver em branco ou se o formato do e-mail estiver incorreto, o Angular marcará o campo como inválido.
 
+```texto
+Observação: Para trabalhar com formulários reativos é necessário importar o módulo 'FormsModule' no arquivo 'app.modules.ts'.
+```
+
 ### Formulários Reactive (Model-Driven)
 
 Os formulários Reactive oferecem maior controle e flexibilidade. Eles são construídos programaticamente e a validação é definida no código TypeScript.
@@ -102,6 +106,9 @@ export class ExemploComponent {
 
 - **enviar() { ... }** - Este método é chamado quando o formulário é enviado. Verificamos se o formulário é válido usando *this.meuForm.valid*. Se for válido, você pode adicionar lógica para processar os dados do formulário.
 
+```texto
+Observação: Para trabalhar com formulários reativos é necessário importar o módulo 'ReactiveFormsModule' no arquivo 'app.modules.ts'.
+```
 
 ## Validação de formulário
 
@@ -113,7 +120,7 @@ A validação de formulários é uma ferramenta para garantir que os dados inser
 
 ```html
 <label for="nome">Nome:</label>
-<input type="text" id="nome" name="nome" ngModel required>
+<input type="text" id="nome" name="nome" #nome="ngModel" ngModel required>
 <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="erro">
   O nome é obrigatório.
 </div>
@@ -317,3 +324,16 @@ Explicação:
 - Se for igual a "*admin*", a validação retorna *{ customValidation: true }*, indicando um erro personalizado.
 
 A documentação oficial do Angular contém informações detalhadas sobre as diretivas de validação e outras funcionalidades relacionadas a formulários. Você pode acessar a documentação online do Angular Forms em [https://angular.io/api?query=valid](https://angular.io/api?query=valid)
+
+
+## Prática
+
+Aqui está a sugestão para a prática:
+
+**Tema do Projeto:** Lista de Tarefas
+
+**Descrição:** Criar uma aplicação de Lista de Tarefas (To-Do List), onde os usuários podem adicionar, marcar como concluídas e remover tarefas. A aplicação deve ser desenvolvida usando o framework Angular, aplicando os conceitos aprendidos na aula.
+
+**Requisitos:**
+
+- Acrescentar ao App To-Do List um formulário para cadastro e edição de atividade.

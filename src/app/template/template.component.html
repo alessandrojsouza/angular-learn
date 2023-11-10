@@ -1,0 +1,21 @@
+<br>
+<h3>Formulário</h3>
+<form #meuForm="ngForm">
+  <!--Campo de nome-->
+  <div class="mb-3">
+    <label for="Input1" class="form-label">Nome</label>
+    <input type="text" class="form-control" id="Input1" name="nome" ngModel #name="ngModel" required/>
+    <p class="alert alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">Campo Obrigatório </p>
+  </div>
+  <!--Campo de email-->
+  <div class="mb-3">
+    <label for="Input2" class="form-label" >e-Mail</label>
+    <input class="form-control" id="Input2" name="mail" ngModel  #email="ngModel" email/>
+    <p class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">Email Inválido</p>
+  </div>
+  <!--Acionador-->
+  <div class="mb-3">
+    <Button (click)="enviar(meuForm)" class="btn btn-primary">Enviar</Button>
+  </div>
+</form>
+

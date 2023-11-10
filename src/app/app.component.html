@@ -1,5 +1,9 @@
-<form #f="ngForm">
-  <input type="text" name="nome" [(ngModel)]="usuario.nome">
-  <input type="text" name="email" [(ngModel)]="usuario.email">
-  <button  (click)="onSubmit(f)">Enviar</button>
-</form>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" routerLink="/template">Template-Driven</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/model">Model-Driven</a>
+  </li>
+</ul>
+<router-outlet></router-outlet>
