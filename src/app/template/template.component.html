@@ -15,7 +15,7 @@
   </div>
   <!--Acionador-->
   <div class="mb-3">
-    <Button (click)="enviar(meuForm)" class="btn btn-primary">Enviar</Button>
+    <Button [disabled]="!meuForm.valid" (click)="enviar(meuForm)" class="btn btn-primary">Enviar</Button>
   </div>
 </form>
 
