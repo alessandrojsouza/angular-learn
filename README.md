@@ -13,14 +13,14 @@ Os formulários Template-Driven são mais simples e baseados no template HTML. A
 Exemplo 
 
 ```html
-<form #meuForm="ngForm" (click)="onSubmit('meuForm')">
+<form #meuForm="ngForm">
   <label for="nome">Nome:</label>
   <input type="text" id="nome" name="nome" ngModel required>
 
   <label for="email">Email:</label>
   <input type="email" id="email" name="email" ngModel required email>
 
-  <button type="submit">Enviar</button>
+  <button (click)="onSubmit(meuForm)">Enviar</button>
 </form>
 ```
 
