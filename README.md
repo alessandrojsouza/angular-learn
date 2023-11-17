@@ -65,7 +65,7 @@ Cada branch implementada marca um conjunto de conceitos que são aplicados em c�
 - Template-driven forms
 - Reactive forms
 
-<a>Aula 8. HTTP Client</a>
+<a href="https://github.com/alessandrojsouza/angular-learn/tree/aula08-HttpClient">Aula 8. HTTP Client</a>
 
 - Interação com APIs RESTful
 - Métodos HTTP (GET, POST, PUT, DELETE)
